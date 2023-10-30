@@ -1,17 +1,51 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
-public class Main {
+import java.util.Scanner;
+
+
+public class LinearEquationRunner {
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Scanner scan = new Scanner(System.in);
+        int x1, y1, x2, y2;
+        String coord1, coord2;
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+        //Welcomes user
+        System.out.println("Welcome!");
+
+
+        //Get coordinates from user
+        System.out.print("Enter coordinate 1: ");
+        coord1 = scan.nextLine();
+        System.out.print("Enter coordinate 2: ");
+        coord2 = scan.nextLine();
+
+
+        //Isolate x1, y1, x2, y2
+        x1 = Integer.parseInt(coord1.substring(1, coord1.indexOf(",")));
+        y1 = Integer.parseInt(coord1.substring(coord1.indexOf(" ") + 1, coord1.length() - 1));
+        x2 = Integer.parseInt(coord2.substring(1, coord2.indexOf(",")));
+        y2 = Integer.parseInt(coord2.substring(coord2.indexOf(" ") + 1, coord2.length() - 1));
+
+
+        System.out.println();
+
+
+        //Checks to see the line if the line is a vertical or horizontal line then creates a LinearEquation object
+        if (x1 == x2) {
+            System.out.println("These points are on a vertical line: x = " + x1);
+        } else if (y1 == y2) {
+            System.out.println("These points are on a horizontal line: y = " + y1);
+        } else {
+            LinearEquation equ = new LinearEquation(x1, y1, x2, y2);
+
+
+            //Displays info using the lineInfo method
+            System.out.println(equ.lineInfo());
+
+
+            //Ask for an x value and give the corresponding coordinate point
+            System.out.println("Enter a value for x: ");
+            double xValue = scan.nextDouble();
+            System.out.println(equ.coordinateForX(xValue));
         }
     }
 }
